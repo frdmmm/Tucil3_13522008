@@ -35,15 +35,17 @@ public class Main{
         }
         System.out.print("Enter the algorithm (UCS/Astar/GBFS): ");
         String algo = scanner.nextLine();
+        while (!algo.toLowerCase().equals("ucs") && !algo.toLowerCase().equals("astar") && !algo.toLowerCase().equals("gbfs")){
+            System.out.println("Invalid algorithm");
+            System.out.print("Enter the algorithm (UCS/Astar/GBFS): ");
+            algo = scanner.nextLine();
+        }
         if (algo.toLowerCase().equals("ucs")){
             a.UCS(start.toLowerCase(), end.toLowerCase(), words);
         } else if (algo.toLowerCase().equals("astar")){
             a.Astar(start.toLowerCase(), end.toLowerCase(), words);
         } else if (algo.toLowerCase().equals("gbfs")){
             a.GreedyBestFirstSearch(start.toLowerCase(), end.toLowerCase(), words);
-        } else {
-            System.out.println("Invalid algorithm");
-            algo = scanner.nextLine();
         }
         a.printSolution();
         scanner.close();

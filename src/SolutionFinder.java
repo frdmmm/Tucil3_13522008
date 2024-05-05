@@ -79,7 +79,7 @@ public class SolutionFinder {
         // try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
         while (!queue.isEmpty()) {
             String current = queue.poll();
-
+            visited.put(current, true);
             this.visitednode++;
             if (current.equals(end)) {
                 found = true;
@@ -89,7 +89,7 @@ public class SolutionFinder {
             // writer.write(current + ": " + paths + "\n"); // Write to file instead of printing
             for (String word : paths) {
                 if (!visited.get(word)) {
-                    visited.put(word, true);
+                    
                     queue.add(word);
                     edgeMap.put(word, current);
                 }
@@ -123,7 +123,7 @@ public class SolutionFinder {
         // try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
         while (!queue.isEmpty()) {
             String current = queue.poll();
-
+            visited.put(current, true);
             this.visitednode++;
             if (current.equals(end)) {
                 found = true;
@@ -133,7 +133,6 @@ public class SolutionFinder {
             // writer.write(current + ": " + paths + "\n");
             for (String word : paths) {
                 if (!visited.get(word)) {
-                    visited.put(word, true);
                     queue.add(word);
                     edgeMap.put(word, current);
                 }
@@ -157,7 +156,7 @@ public class SolutionFinder {
         if (solution.isEmpty()){
             System.out.println("No solution found");
         } else {
-            System.out.println("Solution found:");
+            System.out.println("Solution found ("+ solution.size()+") :");
             for (String word : solution){
                 System.out.println(word);
             }
