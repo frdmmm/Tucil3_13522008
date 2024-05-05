@@ -1,16 +1,14 @@
-import java.util.ArrayList;
-import java.time.Instant;
-// import java.io.BufferedWriter;
-// import java.io.FileWriter;
-// import java.io.IOException;
 import java.time.Duration;
-import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Queue;
-import java.util.LinkedList;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+
 
 public class SolutionFinder {
     private ArrayList<String> solution;
@@ -35,7 +33,6 @@ public class SolutionFinder {
         // try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
         while (!queue.isEmpty()) {
             String current = queue.poll();
-
             this.visitednode++;
             if (current.equals(end)) {
                 found = true;
@@ -45,9 +42,9 @@ public class SolutionFinder {
             // writer.write(current + ": " + paths + "\n"); 
             for (String word : paths) {
                 if (!visited.get(word)) {
-                    visited.put(word, true);
                     queue.add(word);
                     edgeMap.put(word, current);
+                    visited.put(word, true);
                 }
             }
         }
@@ -89,7 +86,6 @@ public class SolutionFinder {
             // writer.write(current + ": " + paths + "\n"); // Write to file instead of printing
             for (String word : paths) {
                 if (!visited.get(word)) {
-                    
                     queue.add(word);
                     edgeMap.put(word, current);
                 }
@@ -116,7 +112,7 @@ public class SolutionFinder {
         for (String str : wordSet) {
             visited.put(str, false);
         }
-        PriorityQueue<String> queue = new PriorityQueue<>(Comparator.comparing(s -> WordFinder.getAstarHeuristic(s, start, end)));
+        PriorityQueue<String> queue = new PriorityQueue<>(Comparator.comparing(s -> WordFinder.getAstarCost(s, start, end)));
         queue.add(start);
         visited.put(start, true);
         boolean found = false;
@@ -135,6 +131,7 @@ public class SolutionFinder {
                 if (!visited.get(word)) {
                     queue.add(word);
                     edgeMap.put(word, current);
+                    // visited.put(word, true);
                 }
             }
         }

@@ -42,7 +42,7 @@ public class WordFinder {
         }
         return distance;
     }
-    public static int getAstarHeuristic(String word, String start, String end){
+    public static int getAstarCost(String word, String start, String end){
         return getDistance(word, end) + getDistance(word, start);
     }
     public static void main(String[] args) {
