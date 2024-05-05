@@ -35,11 +35,11 @@ public class Main{
         }
         System.out.print("Enter the algorithm (UCS/Astar/GBFS): ");
         String algo = scanner.nextLine();
-        if (algo.toLowerCase().equals("UCS")){
+        if (algo.toLowerCase().equals("ucs")){
             a.UCS(start.toLowerCase(), end.toLowerCase(), words);
-        } else if (algo.toLowerCase().equals("Astar")){
+        } else if (algo.toLowerCase().equals("astar")){
             a.Astar(start.toLowerCase(), end.toLowerCase(), words);
-        } else if (algo.toLowerCase().equals("GBFS")){
+        } else if (algo.toLowerCase().equals("gbfs")){
             a.GreedyBestFirstSearch(start.toLowerCase(), end.toLowerCase(), words);
         } else {
             System.out.println("Invalid algorithm");
