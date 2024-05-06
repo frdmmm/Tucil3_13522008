@@ -112,26 +112,27 @@ public class SolutionFinder {
         for (String str : wordSet) {
             visited.put(str, false);
         }
-        PriorityQueue<String> queue = new PriorityQueue<>(Comparator.comparing(s -> WordFinder.getAstarCost(s, start, end)));
-        queue.add(start);
-        visited.put(start, true);
+        PriorityQueue<Node> queue = new PriorityQueue<>(Comparator.comparing(s -> WordFinder.getAstarCost(s, end) + s.cost));
+        queue.add(new Node(start, 0));//Astar menggunakan node untuk menyimpan cost saat ini.
         boolean found = false;
         // try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
         while (!queue.isEmpty()) {
-            String current = queue.poll();
-            visited.put(current, true);
+            Node current = queue.poll();
+            visited.put(current.word, true);
             this.visitednode++;
-            if (current.equals(end)) {
+            if (current.word.equals(end)) {
                 found = true;
                 break;
             }
-            Set<String> paths = WordFinder.findWordsWithOneCharDifference(current, wordSet);
-            // writer.write(current + ": " + paths + "\n");
+            Set<String> paths = WordFinder.findWordsWithOneCharDifference(current.word, wordSet);
+
             for (String word : paths) {
                 if (!visited.get(word)) {
-                    queue.add(word);
-                    edgeMap.put(word, current);
-                    // visited.put(word, true);
+                    queue.add(new Node(word, current.cost + 1));
+                    if (!edgeMap.containsKey(word)){
+                        edgeMap.put(word, current.word);
+                    }
+
                 }
             }
         }
@@ -143,9 +144,7 @@ public class SolutionFinder {
             }
             this.solution.add(0, start);
         }
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+
         Instant end_time = Instant.now();
         duration = Duration.between(start_time, end_time);
     }
@@ -161,4 +160,5 @@ public class SolutionFinder {
         System.out.println("Visited nodes: " + visitednode);
         System.out.println("Time taken: " + duration.toMillis() + "ms");
     }
+
 }

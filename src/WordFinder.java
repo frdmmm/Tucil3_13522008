@@ -42,8 +42,8 @@ public class WordFinder {
         }
         return distance;
     }
-    public static int getAstarCost(String word, String start, String end){
-        return getDistance(word, end) + getDistance(word, start);
+    public static int getAstarCost(Node word,  String end){
+        return getDistance(word.word, end);
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
